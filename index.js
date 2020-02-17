@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const productService = require('./services/product.service');
 const cartService = require('./services/cart.service');
 
-const connectionString = 'mongodb://demoUser:demoPassword@127.0.0.1/demo';
+import Server from './apolloServer';
+
+const connectionString = 'mongodb://demoUser:demoPassword@172.16.51.23/demo';
 mongoose.connect(connectionString);
 const db = mongoose.connection;
 const app = express();
@@ -61,6 +63,6 @@ app.post('/removeCart', async (req, res) => {
 });
 
 
-
+Server.applyMiddleware({app});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
